@@ -37,7 +37,7 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         // locking mouse so it doesnt move around & isnt visible
-        if (IsOwner && lockCursor)
+        if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
