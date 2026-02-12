@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 710285130
+  GlobalObjectIdHash: 3012953518
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -368,6 +368,9 @@ MonoBehaviour:
   bullet: {fileID: 368023445117370160, guid: b3a3f6fb0b8b24aacb7cdccce9281df8, type: 3}
   audioListener: {fileID: 1825642164887086421}
   playerCamera: {fileID: 4552786149932298290}
+  mouseSensitivity: 200
+  maxLookAngle: 40
+  lockCursor: 1
 --- !u!114 &7525801754623021428
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,11 +25,29 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private AudioListener audioListener;
     // reference to the camera
     [SerializeField] private Camera playerCamera;
+    // mouse look settings
+    [Header("Mouse Look")]
+    public float mouseSensitivity = 200f;
+    public float maxLookAngle = 80f;
+    public bool lockCursor = true;
+    private float xRotation = 0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        // locking mouse so it doesnt move around & isnt visible
+        if (IsOwner && lockCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        // setting initial camera rotation
+        if (playerCamera != null)
+        {
+            xRotation = playerCamera.transform.localEulerAngles.x;
+            if (xRotation > 180f) xRotation -= 360f;
+        }
 
     }
     // Update is called once per frame
@@ -44,21 +62,36 @@ public class PlayerMovement : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            moveDirection.z = +1f;
+            moveDirection += transform.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            moveDirection.z = -1f;
+            moveDirection -= transform.forward;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            moveDirection.x = -1f;
+            moveDirection -= transform.right;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            moveDirection.x = +1f;
+            moveDirection += transform.right;
         }
         transform.position += moveDirection * speed * Time.deltaTime;
+
+        // mouse look stuff
+        if (playerCamera != null)
+        {
+            // getting mouse movements
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
+            // rotating camera
+            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+            transform.Rotate(Vector3.up * mouseX); // rotating player
+        }
 
 
         // if I is pressed spawn the object 
