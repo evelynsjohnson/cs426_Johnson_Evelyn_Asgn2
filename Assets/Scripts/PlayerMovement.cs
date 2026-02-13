@@ -31,17 +31,17 @@ public class PlayerMovement : NetworkBehaviour
     public float maxLookAngle = 80f;
     public bool lockCursor = true;
     private float xRotation = 0f;
-
+    private bool mouseDisabled = false;
 
     // Start is called before the first frame update
     void Start()
     {
         // locking mouse so it doesnt move around & isnt visible
-        // if (lockCursor)
-        // {
-        //     Cursor.lockState = CursorLockMode.Locked;
-        //     Cursor.visible = false;
-        // }
+        if (lockCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         // setting initial camera rotation
         if (playerCamera != null)
         {
@@ -77,9 +77,22 @@ public class PlayerMovement : NetworkBehaviour
             moveDirection += transform.right;
         }
         transform.position += moveDirection * speed * Time.deltaTime;
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            mouseDisabled = !mouseDisabled;
+            if (mouseDisabled)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
         // mouse look stuff
-        if (playerCamera != null)
+        if (playerCamera != null && !mouseDisabled)
         {
             // getting mouse movements
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
