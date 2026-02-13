@@ -37,11 +37,11 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         // locking mouse so it doesnt move around & isnt visible
-        if (lockCursor)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        // if (lockCursor)
+        // {
+        //     Cursor.lockState = CursorLockMode.Locked;
+        //     Cursor.visible = false;
+        // }
         // setting initial camera rotation
         if (playerCamera != null)
         {
