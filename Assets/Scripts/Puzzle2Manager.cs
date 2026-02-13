@@ -6,10 +6,13 @@ public class Puzzle2Manager : NetworkBehaviour
 {
     [SerializeField] private int[] correctSequence = { 1, 3, 0, 2 };
     [SerializeField] private Puzzle2Plate[] plates;
-
+    [SerializeField] private GameObject solvedTextObject;
     public bool puzzleActive = true;
     private int currentStep = 0;
-
+    private void Start()
+    {
+        solvedTextObject.SetActive(false);
+    }
     [ServerRpc(RequireOwnership = false)]
     public void StepOnPlateServerRpc(int plateIndex)
     {
@@ -37,17 +40,33 @@ public class Puzzle2Manager : NetworkBehaviour
         Debug.Log("PUZZLE SOLVED");
         currentStep = 0;
         puzzleActive = false;
+        AllPlatesGreenClientRpc();
+        ShowSolvedTextClientRpc();
     }
 
     private void ResetPuzzle()
     {
         currentStep = 0;
     }
+    [ClientRpc]
+    private void ShowSolvedTextClientRpc()
+    {
+        solvedTextObject.SetActive(true);
+    }
 
     [ClientRpc]
     private void CorrectPlateClientRpc(int plateIndex)
     {
         plates[plateIndex].SetGreen();
+    }
+
+    [ClientRpc]
+    private void AllPlatesGreenClientRpc()
+    {
+        foreach (var plate in plates)
+        {
+            plate.SetGreen();
+        }
     }
 
     [ClientRpc]
