@@ -77,6 +77,7 @@ public class PlayerMovement : NetworkBehaviour
             moveDirection += transform.right;
         }
         transform.position += moveDirection * speed * Time.deltaTime;
+        // Mouse disabling/enabling
         if (Input.GetKeyDown(KeyCode.E))
         {
             mouseDisabled = !mouseDisabled;
@@ -109,28 +110,28 @@ public class PlayerMovement : NetworkBehaviour
 
         // if I is pressed spawn the object 
         // if J is pressed destroy the object
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            //instantiate the object
-            instantiatedPrefab = Instantiate(spawnedPrefab);
-            // spawn it on the scene
-            instantiatedPrefab.GetComponent<NetworkObject>().Spawn(true);
-        }
+        // if (Input.GetKeyDown(KeyCode.I))
+        // {
+        //     //instantiate the object
+        //     instantiatedPrefab = Instantiate(spawnedPrefab);
+        //     // spawn it on the scene
+        //     instantiatedPrefab.GetComponent<NetworkObject>().Spawn(true);
+        // }
 
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            //despawn the object
-            instantiatedPrefab.GetComponent<NetworkObject>().Despawn(true);
-            // destroy the object
-            Destroy(instantiatedPrefab);
-        }
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     //despawn the object
+        //     instantiatedPrefab.GetComponent<NetworkObject>().Despawn(true);
+        //     // destroy the object
+        //     Destroy(instantiatedPrefab);
+        // }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            // call the BulletSpawningServerRpc method
-            // as client can not spawn objects
-            BulletSpawningServerRpc(cannon.transform.position, cannon.transform.rotation);
-        }
+        // if (Input.GetButtonDown("Fire1"))
+        // {
+        //     // call the BulletSpawningServerRpc method
+        //     // as client can not spawn objects
+        //     BulletSpawningServerRpc(cannon.transform.position, cannon.transform.rotation);
+        // }
     }
 
     // this method is called when the object is spawned
