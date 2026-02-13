@@ -1,11 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
+using System.Collections;
 
 public class Puzzle2Manager : NetworkBehaviour
 {
     [SerializeField] private int[] correctSequence = { 1, 3, 0, 2 };
-    public bool puzzleActive = true;
+    [SerializeField] private Puzzle2Plate[] plates;
 
+    public bool puzzleActive = true;
     private int currentStep = 0;
 
     [ServerRpc(RequireOwnership = false)]
@@ -16,6 +18,7 @@ public class Puzzle2Manager : NetworkBehaviour
         {
             currentStep++;
             Debug.Log("Correct!");
+            CorrectPlateClientRpc(plateIndex);
             if (currentStep >= correctSequence.Length)
             {
                 PuzzleSolved();
@@ -24,6 +27,7 @@ public class Puzzle2Manager : NetworkBehaviour
         else
         {
             Debug.Log("WRONG!");
+            WrongPlateClientRpc();
             ResetPuzzle();
         }
     }
@@ -33,13 +37,37 @@ public class Puzzle2Manager : NetworkBehaviour
         Debug.Log("PUZZLE SOLVED");
         currentStep = 0;
         puzzleActive = false;
-
-        // idk do something
     }
 
     private void ResetPuzzle()
     {
         currentStep = 0;
-        Debug.Log("Puzzle reset");
+    }
+
+    [ClientRpc]
+    private void CorrectPlateClientRpc(int plateIndex)
+    {
+        plates[plateIndex].SetGreen();
+    }
+
+    [ClientRpc]
+    private void WrongPlateClientRpc()
+    {
+        StartCoroutine(WrongFlash());
+    }
+
+    private IEnumerator WrongFlash()
+    {
+        foreach (var plate in plates)
+        {
+            plate.SetRed();
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        foreach (var plate in plates)
+        {
+            plate.ResetColor();
+        }
     }
 }

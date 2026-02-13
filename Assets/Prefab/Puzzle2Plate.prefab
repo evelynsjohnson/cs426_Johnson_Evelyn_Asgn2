@@ -129,3 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   plateIndex: 0
   puzzleManager: {fileID: 0}
+  plateRenderer: {fileID: 6686487771166434953}
