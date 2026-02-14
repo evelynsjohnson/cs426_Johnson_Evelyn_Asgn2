@@ -20,9 +20,9 @@
 
 #### Serious Objective
 
-- Protect your computer from viruses and other malicious actors (?)
-- What should you do if you find that your device has suspicious applications on it? (?)
-- Delete it? (?)
+- Protect your computer from viruses and other malicious actors
+- Q: What should you do if you find that your device has suspicious applications on it?
+- A: Delete it!
 
 ### Unusual Rules
 
