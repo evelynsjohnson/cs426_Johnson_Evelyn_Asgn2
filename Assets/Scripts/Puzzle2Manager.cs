@@ -13,10 +13,12 @@ public class Puzzle2Manager : NetworkBehaviour
     {
         solvedTextObject.SetActive(false);
     }
-    [ServerRpc(RequireOwnership = false)]
-    public void StepOnPlateServerRpc(int plateIndex)
+
+    public void StepOnPlate(int plateIndex)
     {
+        if (!IsServer) return;
         if (!puzzleActive) return;
+        if (currentStep >= correctSequence.Length) return;
         if (plateIndex == correctSequence[currentStep])
         {
             currentStep++;
@@ -38,8 +40,8 @@ public class Puzzle2Manager : NetworkBehaviour
     private void PuzzleSolved()
     {
         Debug.Log("PUZZLE SOLVED");
-        currentStep = 0;
         puzzleActive = false;
+        currentStep = 0;
         AllPlatesGreenClientRpc();
         ShowSolvedTextClientRpc();
     }
@@ -48,6 +50,7 @@ public class Puzzle2Manager : NetworkBehaviour
     {
         currentStep = 0;
     }
+
     [ClientRpc]
     private void ShowSolvedTextClientRpc()
     {
@@ -78,15 +81,11 @@ public class Puzzle2Manager : NetworkBehaviour
     private IEnumerator WrongFlash()
     {
         foreach (var plate in plates)
-        {
             plate.SetRed();
-        }
 
         yield return new WaitForSeconds(1f);
 
         foreach (var plate in plates)
-        {
             plate.ResetColor();
-        }
     }
 }

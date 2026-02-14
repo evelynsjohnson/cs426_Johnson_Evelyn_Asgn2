@@ -1966,7 +1966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The second part of your secrete word: TEE'
+  m_text: 'The second part of your secret word: EET'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3722,7 +3722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Virus Deleted!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -24884,6 +24884,7 @@ GameObject:
   - component: {fileID: 1583948678}
   - component: {fileID: 1583948677}
   - component: {fileID: 1583948676}
+  - component: {fileID: 1583948681}
   - component: {fileID: 1583948680}
   m_Layer: 5
   m_Name: WinGameCanvas
@@ -24987,9 +24988,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3207d4244ecb84c49be266d9e97c1a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinGameTeleport
+  ShowTopMostFoldoutHeaderGroup: 1
   inputField: {fileID: 1091370185}
   teleportDestination: {fileID: 1586530320}
-  rb: {fileID: 0}
+--- !u!114 &1583948681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583948675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 3471122684
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1001 &1584415415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32191,7 +32217,7 @@ MonoBehaviour:
 
 
     At the end of this path, you must answer: "What should you do
-    if you find that your device has suspicious applications on it?'
+    if you find that your device has suspicious applications on it?"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

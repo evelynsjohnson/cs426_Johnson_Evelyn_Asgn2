@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 public class Puzzle2Plate : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class Puzzle2Plate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!NetworkManager.Singleton.IsServer) return;
         if (!puzzleManager.puzzleActive) return;
         if (!other.CompareTag("Player")) return;
+        if (!other.attachedRigidbody) return;
+        if (!other.TryGetComponent<NetworkObject>(out var netObj)) return;
+        if (!netObj.IsPlayerObject) return;
 
-        puzzleManager.StepOnPlateServerRpc(plateIndex);
+        puzzleManager.StepOnPlate(plateIndex);
     }
 
     public void SetGreen()
